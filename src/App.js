@@ -3,7 +3,7 @@ import HomePage from "./pages/HomePage.jsx";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App font-opensans">
       <HomePage />
     </div>
   );
