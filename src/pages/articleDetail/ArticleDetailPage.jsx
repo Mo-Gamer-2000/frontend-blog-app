@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import BreadCrumbs from "../../components/BreadCrumbs";
 import CommentsContainer from "../../components/comments/CommentsContainer";
 import MainLayout from "../../components/MainLayout";
-// import SocialShareButtons from "../../components/SocialShareButtons";
+import SocialShareButtons from "../../components/SocialShareButtons";
 import { images } from "../../constants";
 import SuggestedPosts from "./container/SuggestedPosts";
 
@@ -94,14 +94,14 @@ const ArticleDetailPage = () => {
                         <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
                             Share on:
                         </h2>
-                        {/*  <SocialShareButtons
+                        <SocialShareButtons
                             url={encodeURI(
                                 "https://github.com/Mo-Gamer-2000"
                             )}
                             title={encodeURIComponent(
                                 "Mo-Gamer-2000"
                             )}
-                        />*/}
+                        />
                     </div>
                 </div>
             </section>
