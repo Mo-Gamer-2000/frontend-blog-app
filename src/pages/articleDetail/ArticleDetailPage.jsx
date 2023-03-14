@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import BreadCrumbs from "../../components/BreadCrumbs";
-// import CommentsContainer from "../../components/comments/CommentsContainer";
+import CommentsContainer from "../../components/comments/CommentsContainer";
 import MainLayout from "../../components/MainLayout";
 // import SocialShareButtons from "../../components/SocialShareButtons";
 import { images } from "../../constants";
@@ -81,7 +81,7 @@ const ArticleDetailPage = () => {
                             lectus proin.
                         </p>
                     </div>
-                    {/*<CommentsContainer className="mt-10" logginedUserId="a" />*/}
+                    <CommentsContainer className="mt-10" logginedUserId="a" />
                 </article>
                 <div>
                     <SuggestedPosts
