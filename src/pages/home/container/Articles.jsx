@@ -4,9 +4,11 @@ import ArticleCard from "../../../components/ArticleCard";
 import { useQuery } from '@tanstack/react-query';
 import { getAllPosts } from '../../../services/index/posts';
 import { toast } from 'react-hot-toast';
+import ArticleCardSkeleton from '../../../components/ArticleCardSkeleton';
+import ErrorMessage from '../../../components/ErrorMessage';
 
 const Articles = () => {
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryFn: () => getAllPosts(),
         queryKey: ["posts"],
         onError: (error) => {
@@ -18,7 +20,11 @@ const Articles = () => {
     return (
         <section className="flex flex-col container mx-auto px-5 py-10">
             <div className=" flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
-                {!isLoading && !isError && data.map((post) => (
+                {isLoading ? [...Array(3)].map((item, index) => (
+                    <ArticleCardSkeleton
+                        key={index}
+                        className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
+                )) : isError ? <ErrorMessage message="Unable to fetch the posts data" /> : data.map((post) => (
                     <ArticleCard key={post._id}
                         post={post}
                         className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]" />
