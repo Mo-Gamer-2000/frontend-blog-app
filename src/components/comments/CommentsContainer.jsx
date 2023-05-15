@@ -25,7 +25,7 @@ const CommentsContainer = ({ className, logginedUserId, comments, postSlug }) =>
         },
     });
 
-    const { mutate: mutateUpdateComments} = useMutation({
+    const { mutate: mutateUpdateComment } = useMutation({
         mutationFn: ({ token, desc, commentId }) => {
             return updateComment({ token, desc, commentId });
         },
