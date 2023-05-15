@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Comment from "./comment";
 import CommentForm from "./CommentForm";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNewComment, updateComment } from "../../services/index/comments";
+import { createNewComment, deleteComment, updateComment } from "../../services/index/comments";
 import { toast } from "react-hot-toast";
 
 const CommentsContainer = ({ className, logginedUserId, comments, postSlug }) => {
@@ -39,6 +39,20 @@ const CommentsContainer = ({ className, logginedUserId, comments, postSlug }) =>
         },
     });
 
+    const { mutate: mutateDeleteComment } = useMutation({
+        mutationFn: ({ token, commentId }) => {
+            return deleteComment({ token, commentId });
+        },
+        onSuccess: () => {
+            toast.success("Your comment is deleted successfully");
+            queryClient.invalidateQueries(["blog", postSlug]);
+        },
+        onError: (error) => {
+            toast.error(error.message);
+            console.log(error);
+        },
+    });
+
     const addCommentHandler = (value, parent = null, replyOnUser = null) => {
         mutateNewComment({ desc: value, parent, replyOnUser, token: userState.userInfo.token, slug: postSlug })
         setAffectedComment(null);
@@ -54,6 +68,7 @@ const CommentsContainer = ({ className, logginedUserId, comments, postSlug }) =>
     };
 
     const deleteCommentHandler = (commentId) => {
+        mutateDeleteComment({ token: userState.userInfo.token, commentId });
     };
 
     return (
